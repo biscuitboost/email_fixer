@@ -88,6 +88,8 @@ st.button("*See An Example*", type='secondary', help="Click to see an example of
 st.markdown("### Your Converted Email:")
 
 if email_input:
+        llm = load_LLM(openai_api_key=openai_api_key)
+
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
 
     formatted_email = llm(prompt_with_email)
