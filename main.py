@@ -98,16 +98,16 @@ if email_input:
         button_id = st.session_state.button_id + 1
         st.session_state.button_id = button_id
         copy_button_html = """
-        <button id="copy-button-{button_id:}" onclick="copyText()">Copy Email</button>
+        <button id="copy-button-{button_id}" onclick="copyText()">Copy Email</button>
         <script>
-            function copyText() {
+            function copyText() {{
                 var copyText = document.getElementById("formatted-email");
                 copyText.select();
                 copyText.setSelectionRange(0, 99999);
                 document.execCommand("copy");
-                var button = document.getElementById("copy-button-{button_id:}");
+                var button = document.getElementById("copy-button-{button_id}");
                 button.innerText = "Copied!";
-            }
+            }}
         </script>
         """.format(button_id=button_id)
         st.markdown(copy_button_html, unsafe_allow_html=True)
