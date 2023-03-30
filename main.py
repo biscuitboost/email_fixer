@@ -56,7 +56,7 @@ with col2:
 
 st.markdown("## Enter Your Email To Convert")
 
-openai_api_key = st.secret["OPENAPI_KEY"]
+openai_api_key = st.secrets["OPENAPI_KEY"]
 
 col1, col2 = st.columns(2)
 with col1:
