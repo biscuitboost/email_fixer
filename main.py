@@ -93,23 +93,23 @@ if email_input:
 
     # add option to copy to clipboard
     if st.button("Copy to Clipboard"):
-        button_id = st.get_last_button_clicked()
-        if button_id == st.session_state.button_id:
-            st.write("Email copied to clipboard!")
+        if "button_id" not in st.session_state:
+            st.session_state.button_id = 0
+        button_id = st.session_state.button_id + 1
+        st.session_state.button_id = button_id
         copy_button_html = """
-        <button id="copy-button" onclick="copyText()">Copy Email</button>
+        <button id="copy-button-{button_id:}" onclick="copyText()">Copy Email</button>
         <script>
             function copyText() {
                 var copyText = document.getElementById("formatted-email");
                 copyText.select();
                 copyText.setSelectionRange(0, 99999);
                 document.execCommand("copy");
-                var button = document.getElementById("copy-button");
+                var button = document.getElementById("copy-button-{button_id:}");
                 button.innerText = "Copied!";
             }
         </script>
-        """
+        """.format(button_id=button_id)
         st.markdown(copy_button_html, unsafe_allow_html=True)
-        st.session_state.button_id = button_id
         st.text_area("Formatted Email", value=formatted_email, key="formatted-email")
     
