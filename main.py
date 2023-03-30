@@ -32,7 +32,7 @@ def load_LLM(openai_api_key):
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
 
-def copy_to_clip(text):
+def copy_to_clip():
     if formatted_email:
         pyperclip.copy(formatted_email)
 
