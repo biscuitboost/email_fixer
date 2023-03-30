@@ -98,5 +98,6 @@ if email_input:
 
 if "text" in st.experimental_get_query_params():
     st.experimental_set_query_params()
-    st.write(st.experimental_get_query_params("text"))
-    st.write("Email copied to clipboard!")     
+    st.write(st.experimental_get_query_params()["text"])
+    st.write("Email copied to clipboard!") 
+    
