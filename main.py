@@ -1,6 +1,8 @@
 import streamlit as st
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
+import pyperclip
+
 
 template = """
     Below is an email from me that may be poorly worded.
@@ -29,6 +31,10 @@ def load_LLM(openai_api_key):
     # Make sure your openai_api_key is set as an environment variable
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
+
+def copy_to_clip(text):
+    if formatted_email:
+        pyperclip.copy(formatted_email)
 
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
 st.header("Email Fixer")
@@ -65,6 +71,7 @@ def get_text():
     return input_text
 
 email_input = get_text()
+        
 
 if len(email_input.split(" ")) > 700:
     st.write("Please enter a shorter email. The maximum length is 700 words.")
@@ -74,7 +81,14 @@ def update_text_with_example():
     print ("in updated")
     st.session_state.email_input = "Sally I am starts work at yours monday from dave"
 
-st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
+st.button("*See An Example*", 
+          type='secondary', 
+          help="Click to see an example of the email you will be converting.", 
+          on_click=update_text_with_example)
+
+st.button("Copy to Clipboard", type='secondary', 
+          help="Click to copy new email to clipboard", 
+          on_click=copy_to_clip)
 
 st.markdown("### Your Converted Email:")
 
@@ -83,3 +97,4 @@ if email_input:
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
     formatted_email = llm(prompt_with_email)
     st.write(formatted_email)
+    
