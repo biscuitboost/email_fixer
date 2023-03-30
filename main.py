@@ -1,5 +1,5 @@
 import streamlit as st
-import clipboard
+from streamlit.components.v1 import html
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
@@ -32,11 +32,6 @@ def load_LLM(openai_api_key):
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
 
-def copy_to_clip():
-    if formatted_email:
-        clipboard.copy(formatted_email)
-        st.write("Formatted email copied to clipboard!")
-        st.session_state.email_input = ""
 
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
 st.header("Email Fixer")
@@ -88,9 +83,6 @@ st.button("*See An Example*",
           help="Click to see an example of the email you will be converting.", 
           on_click=update_text_with_example)
 
-st.button("Copy to Clipboard", type='secondary', 
-          help="Click to copy new email to clipboard", 
-          on_click=copy_to_clip)
 
 st.markdown("### Your Converted Email:")
 
