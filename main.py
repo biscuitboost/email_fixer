@@ -35,13 +35,13 @@ def load_LLM(openai_api_key):
     return llm
 
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
-st.header("Globalize Text")
+st.header("Email Fixer")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("# Introduction to [App Name]\n\n \
-Introducing [App Name], the perfect solution for anyone struggling with English grammar and writing. Whether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. With a few clicks, our app will analyze your message and provide well-written alternatives that are both formal and informal.")
+    st.markdown("\
+Introducing **Email Fixer**, the perfect solution for anyone struggling with English grammar and writing. \n\nWhether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. \n\nWith a few clicks, our app will analyze your message and provide well-written alternatives that are both formal and informal.")
 
 with col2:
     st.markdown("- **Improved communication:** Our app helps bridge the communication gap by refining your message, making it easier to understand and more professional.\n \
