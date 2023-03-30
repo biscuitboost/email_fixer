@@ -7,7 +7,7 @@ template = """
     Your goal is to:
     - Properly format the email
     - Convert the input text to a specified tone
-    - Convert the input text to a specified language
+    - Convert the input text to a specified English dialect
 
     Here are some examples different Tones:
     - Formal: We went to Barcelona for the weekend. We have a lot of things to tell you.
@@ -17,7 +17,7 @@ template = """
     
     Below is the email, tone, and dialect:
     TONE: {tone}
-    LANGUAGE: {dialect}
+    DIALECT: {dialect}
     EMAIL: {email}
     
     YOUR {dialect} RESPONSE:
@@ -62,7 +62,7 @@ with col1:
 with col2:
     option_dialect = st.selectbox(
         'Which English Dialect would you like?',
-        ('American', 'British', 'Scots', 'Welsh', 'Cornish'))
+        ('UK English', 'US English', 'Scots English', 'Welsh English', 'Cornish English'))
 
 def get_text():
     input_text = st.text_area(label="Email Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
