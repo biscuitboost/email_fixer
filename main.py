@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit.components.v1 import html
+from streamlit import util
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
@@ -91,13 +91,9 @@ if email_input:
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
     formatted_email = llm(prompt_with_email)
     st.write(formatted_email)
+
     # add option to copy to clipboard
     if st.button("Copy to Clipboard"):
-        st.experimental_set_query_params(text=formatted_email)
-        st.experimental_rerun()
-
-if "text" in st.experimental_get_query_params():
-    st.experimental_set_query_params()
-    st.write(st.experimental_get_query_params()["text"])
-    st.write("Email copied to clipboard!") 
+        util.copy_to_clipboard(formatted_email)
+        st.write("Email copied to clipboard!")
     
