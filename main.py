@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit import util
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
@@ -94,6 +93,23 @@ if email_input:
 
     # add option to copy to clipboard
     if st.button("Copy to Clipboard"):
-        util.copy_to_clipboard(formatted_email)
-        st.write("Email copied to clipboard!")
+        button_id = st.get_last_button_clicked()
+        if button_id == st.session_state.button_id:
+            st.write("Email copied to clipboard!")
+        copy_button_html = """
+        <button id="copy-button" onclick="copyText()">Copy Email</button>
+        <script>
+            function copyText() {
+                var copyText = document.getElementById("formatted-email");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+                var button = document.getElementById("copy-button");
+                button.innerText = "Copied!";
+            }
+        </script>
+        """
+        st.markdown(copy_button_html, unsafe_allow_html=True)
+        st.session_state.button_id = button_id
+        st.text_area("Formatted Email", value=formatted_email, key="formatted-email")
     
