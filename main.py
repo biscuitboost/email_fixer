@@ -1,20 +1,17 @@
 import streamlit as st
-import pyperclip
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
+import pyperclip
+
 
 template = """
-    Below is an email that may be poorly worded.
+    Below is an email from me that may be poorly worded.
     Your goal is to:
     - Properly format the email
     - Convert the input text to a specified tone
-    - Convert the input text to a specified English dialect
-
-    Here are some examples different Tones:
-    - Formal: We went to Barcelona for the weekend. We have a lot of things to tell you.
-    - Informal: Went to Barcelona for the weekend. Lots to tell you.  
-
-    Please start the email with a warm introduction. Add the introduction if you need to.
+    - Convert the input text to a specified dialect
+ 
+    Please start the email with a warm introduction.
     
     Below is the email, tone, and dialect:
     TONE: {tone}
@@ -34,6 +31,10 @@ def load_LLM(openai_api_key):
     # Make sure your openai_api_key is set as an environment variable
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
+
+def copy_to_clip():
+    if formatted_email:
+        print ("copy to clipboard")
 
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
 st.header("Email Fixer")
@@ -67,22 +68,33 @@ with col2:
 
 def get_text():
     input_text = st.text_area(label="Email Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
-    if len(input_text.split(" ")) > 700:
-        st.write("Please enter a shorter email. The maximum length is 700 words.")
-        st.stop()
     return input_text
 
 email_input = get_text()
+        
 
-def copy_to_clipboard(text):
-    pyperclip.copy(text)
+if len(email_input.split(" ")) > 700:
+    st.write("Please enter a shorter email. The maximum length is 700 words.")
+    st.stop()
 
-def update_preview():
-    if email_input:
-        llm = load_LLM(openai_api_key=openai_api_key)
-        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
-        formatted_email = llm(prompt_with_email)
-        st.text_area(label="Converted Email", value=formatted_email, height=300)
-        st.button("Copy to Clipboard", on_click=copy_to_clipboard(formatted_email))
+def update_text_with_example():
+    print ("in updated")
+    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
 
-st.button("Convert Email", on_click=update_preview)
+st.button("*See An Example*", 
+          type='secondary', 
+          help="Click to see an example of the email you will be converting.", 
+          on_click=update_text_with_example)
+
+st.button("Copy to Clipboard", type='secondary', 
+          help="Click to copy new email to clipboard", 
+          on_click=copy_to_clip)
+
+st.markdown("### Your Converted Email:")
+
+if email_input:
+    llm = load_LLM(openai_api_key=openai_api_key)
+    prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+    formatted_email = llm(prompt_with_email)
+    st.write(formatted_email)
+    
