@@ -40,13 +40,13 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("\
-Introducing **Email Fixer**, the perfect solution for anyone struggling with English grammar and writing. \n\nWhether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. \n\nWith a few clicks, our app will analyze your message and provide well-written alternatives that are both formal and informal.")
+Introducing **Email Fixer**, the perfect solution for anyone struggling with English grammar and writing. \n\nWhether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. \n\nWith a few clicks, our app will analyze your email and provide well-written alternatives that are either formal and informal.")
 
 with col2:
-    st.markdown("- **Improved communication:** Our app helps bridge the communication gap by refining your message, making it easier to understand and more professional.\n \
+    st.markdown("- **Improved communication:** Our app helps bridge the communication gap by refining your email, making it easier to understand and more professional.\n \
 - **Time-saving:** Save time and effort by having your email automatically re-written, preventing the need for manual editing and revision. \n \
-- **Increased confidence:** With our app, you can feel more confident in your writing skills, knowing that your message is accurately conveyed and polished. \n \
-- **Competitive edge:** Stand out from the crowd by creating highly professional messages that impress your recipients.")    
+- **Increased confidence:** With our app, you can feel more confident in your writing skills, knowing that your email is accurately conveyed and polished. \n \
+- **Competitive edge:** Stand out from the crowd by creating highly professional emails that impress your recipients.")    
 
 st.markdown("## Enter Your Email To Convert")
 
