@@ -1,7 +1,7 @@
 import streamlit as st
+import clipboard
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
-import pyperclip
 
 
 template = """
@@ -34,7 +34,9 @@ def load_LLM(openai_api_key):
 
 def copy_to_clip():
     if formatted_email:
-        print ("copy to clipboard")
+        clipboard.copy(formatted_email)
+        st.write("Formatted email copied to clipboard!")
+        st.session_state.email_input = ""
 
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
 st.header("Email Fixer")
