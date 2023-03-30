@@ -3,17 +3,13 @@ from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
 template = """
-    Below is an email that may be poorly worded.
+    Below is an email from me that may be poorly worded.
     Your goal is to:
     - Properly format the email
     - Convert the input text to a specified tone
-    - Convert the input text to a specified English dialect
-
-    Here are some examples different Tones:
-    - Formal: We went to Barcelona for the weekend. We have a lot of things to tell you.
-    - Informal: Went to Barcelona for the weekend. Lots to tell you.  
-
-    Please start the email with a warm introduction. Add the introduction if you need to.
+    - Convert the input text to a specified dialect
+ 
+    Please start the email with a warm introduction.
     
     Below is the email, tone, and dialect:
     TONE: {tone}
