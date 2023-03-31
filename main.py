@@ -43,13 +43,7 @@ def update_text_with_example():
     print ("in updated")
     st.session_state.email_input = "Sally I am starts work at yours monday from dave"
 
-def fix_email():
-        llm = load_LLM(openai_api_key=openai_api_key)
-        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
-        formatted_email = llm(prompt_with_email)
-        st.markdown("### Your Converted Email:")
-        st.code(formatted_email, language=None)
-        st.balloons()
+
 
 ##################
 # Page Code
@@ -84,6 +78,14 @@ if len(email_input.split(" ")) > 700:
     st.warning("Please enter a shorter email. The maximum length is 700 words.")
     st.stop()
 
+def fix_email():
+        llm = load_LLM(openai_api_key=openai_api_key)
+        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+        formatted_email = llm(prompt_with_email)
+        st.markdown("### Your Converted Email:")
+        st.code(formatted_email, language=None)
+        st.balloons()
+
 
 st.button("*See An Example*", 
           type='secondary', 
@@ -94,6 +96,7 @@ st.button("*Fix My Email*",
           type='secondary', 
           help="Click to have AI rewrite your email.", 
           on_click=fix_email)
+
 
 
 col1, col2 = st.columns(2)        
