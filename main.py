@@ -92,7 +92,7 @@ st.button("*See An Example*",
 
 
 if email_input:
-    fix_email
+    fix_email()
 
 col1, col2 = st.columns(2)        
 with col1:
