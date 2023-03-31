@@ -72,7 +72,7 @@ with col2:
 
 
 email_input = get_text()
-        
+formatted_email = None        
 
 if len(email_input.split(" ")) > 700:
     st.warning("Please enter a shorter email. The maximum length is 700 words.")
@@ -82,9 +82,7 @@ def fix_email():
         llm = load_LLM(openai_api_key=openai_api_key)
         prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
         formatted_email = llm(prompt_with_email)
-        st.markdown("### Your Converted Email:")
-        st.code(formatted_email, language=None)
-        st.balloons()
+
 
 
 st.button("*See An Example*", 
@@ -97,7 +95,10 @@ st.button("*Fix My Email*",
           help="Click to have AI rewrite your email.", 
           on_click=fix_email)
 
-
+if formatted_email:
+    st.markdown("### Your Converted Email:")
+    st.code(formatted_email, language=None)
+    st.balloons()
 
 col1, col2 = st.columns(2)        
 with col1:
