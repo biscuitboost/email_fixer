@@ -95,8 +95,8 @@ if email_input:
     st.markdown("""
     <style>
     .stTextArea [data-baseweb=base-input] [disabled=""]{
-        background-image: linear-gradient(45deg, red, purple, red);
-        -webkit-text-fill-color: white;
+        background-image: linear-gradient(45deg, #F0F5FA, #FEFFEB, #F0F5FA);
+        -webkit-text-fill-color: black;
     }
     </style>
     """,unsafe_allow_html=True)
