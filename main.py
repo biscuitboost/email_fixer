@@ -74,7 +74,7 @@ email_input = get_text()
         
 
 if len(email_input.split(" ")) > 700:
-    st.write("Please enter a shorter email. The maximum length is 700 words.")
+    st.warning("Please enter a shorter email. The maximum length is 700 words.")
     st.stop()
 
 
@@ -92,28 +92,26 @@ if email_input:
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
     formatted_email = llm(prompt_with_email)
     st.write(formatted_email)
+    st.markdown("""
+    <style>
+    .stTextArea [data-baseweb=base-input] {
+        background-image: linear-gradient(140deg, rgb(54, 36, 31) 0%, rgb(121, 56, 100) 50%, rgb(106, 117, 25) 75%);
+        -webkit-text-fill-color: white;
+    }
 
-    # add option to copy to clipboard
-    if st.button("Copy to Clipboard"):
-        if "button_id" not in st.session_state:
-            st.session_state.button_id = 0
-        button_id = st.session_state.button_id + 1
-        st.session_state.button_id = button_id
-        copy_button_html = """
-        <button id="copy-button-{button_id}" onclick="copyText()">Copy Email</button>
-        <script>
-            function copyText() {{
-                var copyText = document.getElementById("formatted-email");
-                copyText.select();
-                copyText.setSelectionRange(0, 99999);
-                document.execCommand("copy");
-                var button = document.getElementById("copy-button-{button_id}");
-                button.innerText = "Copied!";
-            }}
-        </script>
-        """.format(button_id=button_id)
-        st.markdown(copy_button_html, unsafe_allow_html=True)
-        st.text_area("Formatted Email", value=formatted_email, key="formatted-email")
+    .stTextArea [data-baseweb=base-input] [disabled=""]{
+        background-image: linear-gradient(45deg, red, purple, red);
+        -webkit-text-fill-color: gray;
+    }
+    </style>
+    """,unsafe_allow_html=True)
+
+    st.text_area(
+    label="Text area:",
+    value="This is a repeated sentence "*20,
+    height=300,
+    disabled=True)
+    st.balloons()
 
 col1, col2 = st.columns(2)        
 with col1:
