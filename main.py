@@ -92,7 +92,7 @@ if email_input:
         formatted_email = llm(prompt_with_email)
         with st.container():
             st.markdown("### Your Converted Email:")
-            st.write(formatted_email)
+            st.info(formatted_email, icon="ℹ️")
     st.balloons()
     
 
