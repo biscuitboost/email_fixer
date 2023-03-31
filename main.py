@@ -43,6 +43,13 @@ def update_text_with_example():
     print ("in updated")
     st.session_state.email_input = "Sally I am starts work at yours monday from dave"
 
+def fix_email():
+        llm = load_LLM(openai_api_key=openai_api_key)
+        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+        formatted_email = llm(prompt_with_email)
+        st.markdown("### Your Converted Email:")
+        st.code(formatted_email, language=None)
+        st.balloons()
 
 ##################
 # Page Code
@@ -78,21 +85,14 @@ if len(email_input.split(" ")) > 700:
     st.stop()
 
 
-
 st.button("*See An Example*", 
           type='secondary', 
           help="Click to see an example of the email you will be converting.", 
           on_click=update_text_with_example)
 
 
-st.markdown("### Your Converted Email:")
-
 if email_input:
-    llm = load_LLM(openai_api_key=openai_api_key)
-    prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
-    formatted_email = llm(prompt_with_email)
-    st.code(formatted_email, language=None)
-    st.balloons()
+    fix_email
 
 col1, col2 = st.columns(2)        
 with col1:
