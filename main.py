@@ -51,7 +51,7 @@ def update_text_with_example():
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
 st.header("Email Fixer")
 
-col1, col2 = st.columns(2)
+
 
 st.markdown("## Enter Your Email To Convert")
 
@@ -114,7 +114,8 @@ if email_input:
         """.format(button_id=button_id)
         st.markdown(copy_button_html, unsafe_allow_html=True)
         st.text_area("Formatted Email", value=formatted_email, key="formatted-email")
-        
+
+col1, col2 = st.columns(2)        
 with col1:
     st.markdown("\
 Introducing **Email Fixer**, the perfect solution for anyone struggling with English grammar and writing. \n\nWhether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. \n\nWith a few clicks, our app will analyze your email and provide well-written alternatives that are either formal and informal.")
