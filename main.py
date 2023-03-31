@@ -101,11 +101,8 @@ if email_input:
     </style>
     """,unsafe_allow_html=True)
 
-    st.text_area(
-    label="Text area:",
-    value=formatted_email,
-    height=300,
-    disabled=True)
+    #st.text_area(    value=formatted_email,    height=300,    disabled=True)
+    st.write(formatted_email)
     st.balloons()
 
 col1, col2 = st.columns(2)        
