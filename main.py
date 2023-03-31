@@ -90,9 +90,11 @@ st.button("*See An Example*",
           help="Click to see an example of the email you will be converting.", 
           on_click=update_text_with_example)
 
+st.button("*Fix My Email*", 
+          type='secondary', 
+          help="Click to have AI rewrite your email.", 
+          on_click=fix_email)
 
-if email_input:
-    fix_email()
 
 col1, col2 = st.columns(2)        
 with col1:
