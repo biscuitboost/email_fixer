@@ -94,7 +94,7 @@ if email_input:
     #st.write(formatted_email)
     st.markdown("""
     <style>
-    .stTextArea [data-baseweb=base-input] [disabled=""]{
+    .stText [data-baseweb=base-input] {
         background-image: linear-gradient(45deg, #F0F5FA, #FEFFEB, #F0F5FA);
         -webkit-text-fill-color: black;
     }
