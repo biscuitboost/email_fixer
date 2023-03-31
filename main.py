@@ -86,7 +86,7 @@ st.button("*See An Example*",
 
 
 if email_input:
-    with st.spinner(text="In progress...")
+    with st.spinner(text="In progress..."):
         llm = load_LLM(openai_api_key=openai_api_key)
         prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
         formatted_email = llm(prompt_with_email)
@@ -94,6 +94,7 @@ if email_input:
             st.markdown("### Your Converted Email:")
             st.write(formatted_email)
     st.balloons()
+    
 
 
 col1, col2 = st.columns(2)        
