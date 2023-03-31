@@ -2,7 +2,9 @@ import streamlit as st
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
-
+##################
+# Global Variables
+##################
 template = """
     Below is an email from me that may be poorly worded.
     Your goal is to:
@@ -24,28 +26,32 @@ prompt = PromptTemplate(
     input_variables=["tone", "dialect", "email"],
     template=template,
 )
-
+##################
+# Functions
+##################
 def load_LLM(openai_api_key):
     """Logic for loading the chain you want to use should go here."""
     # Make sure your openai_api_key is set as an environment variable
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
 
+def get_text():
+    input_text = st.text_area(label="Email Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
+    return input_text
+
+def update_text_with_example():
+    print ("in updated")
+    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
+
+
+##################
+# Page Code
+##################
 
 st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
 st.header("Email Fixer")
 
 col1, col2 = st.columns(2)
-
-with col1:
-    st.markdown("\
-Introducing **Email Fixer**, the perfect solution for anyone struggling with English grammar and writing. \n\nWhether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. \n\nWith a few clicks, our app will analyze your email and provide well-written alternatives that are either formal and informal.")
-
-with col2:
-    st.markdown("- **Improved communication:** Our app helps bridge the communication gap by refining your email, making it easier to understand and more professional.\n \
-- **Time-saving:** Save time and effort by having your email automatically re-written, preventing the need for manual editing and revision. \n \
-- **Increased confidence:** With our app, you can feel more confident in your writing skills, knowing that your email is accurately conveyed and polished. \n \
-- **Competitive edge:** Stand out from the crowd by creating highly professional emails that impress your recipients.")    
 
 st.markdown("## Enter Your Email To Convert")
 
@@ -62,9 +68,7 @@ with col2:
         'Which English Dialect would you like?',
         ('British English', 'American English', 'Scots', 'Welsh', 'Cornish'))
 
-def get_text():
-    input_text = st.text_area(label="Email Input", label_visibility='collapsed', placeholder="Your Email...", key="email_input")
-    return input_text
+
 
 email_input = get_text()
         
@@ -73,9 +77,7 @@ if len(email_input.split(" ")) > 700:
     st.write("Please enter a shorter email. The maximum length is 700 words.")
     st.stop()
 
-def update_text_with_example():
-    print ("in updated")
-    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
+
 
 st.button("*See An Example*", 
           type='secondary', 
@@ -112,4 +114,14 @@ if email_input:
         """.format(button_id=button_id)
         st.markdown(copy_button_html, unsafe_allow_html=True)
         st.text_area("Formatted Email", value=formatted_email, key="formatted-email")
+        
+with col1:
+    st.markdown("\
+Introducing **Email Fixer**, the perfect solution for anyone struggling with English grammar and writing. \n\nWhether you're a non-native speaker, have limited proficiency, or just need some extra help, our app offers a simple solution to elevate your writing skills. \n\nWith a few clicks, our app will analyze your email and provide well-written alternatives that are either formal and informal.")
+
+with col2:
+    st.markdown("- **Improved communication:** Our app helps bridge the communication gap by refining your email, making it easier to understand and more professional.\n \
+- **Time-saving:** Save time and effort by having your email automatically re-written, preventing the need for manual editing and revision. \n \
+- **Increased confidence:** With our app, you can feel more confident in your writing skills, knowing that your email is accurately conveyed and polished. \n \
+- **Competitive edge:** Stand out from the crowd by creating highly professional emails that impress your recipients.")    
     
