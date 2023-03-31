@@ -91,18 +91,7 @@ if email_input:
     llm = load_LLM(openai_api_key=openai_api_key)
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
     formatted_email = llm(prompt_with_email)
-    #st.write(formatted_email)
-    st.markdown("""
-    <style>
-    .stText [data-baseweb=base-input] {
-        background-image: linear-gradient(45deg, #F0F5FA, #FEFFEB, #F0F5FA);
-        -webkit-text-fill-color: black;
-    }
-    </style>
-    """,unsafe_allow_html=True)
-
-    #st.text_area(    value=formatted_email,    height=300,    disabled=True)
-    st.write(formatted_email)
+    st.code(formatted_email)
     st.balloons()
 
 col1, col2 = st.columns(2)        
