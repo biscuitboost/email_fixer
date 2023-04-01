@@ -97,13 +97,13 @@ if len(email_input.split(" ")) > 700:
     st.stop()
 
 
-col1, col2 = st.columns(2)
-with col1:
+col1, col2 = st.columns(4)
+with col2:
     st.button("*See An Example*", 
           type='secondary', 
           help="Click to see an example of the email you will be converting.", 
           on_click=update_text_with_example)
-with col2:
+with col3:
     st.button("*Fix My Email*", 
           type='primary', 
           help="Click Fix Your Email", 
