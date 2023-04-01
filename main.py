@@ -43,7 +43,7 @@ def get_text():
 
 def update_text_with_example():
     print ("in updated")
-    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
+    st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
 
 ##################
