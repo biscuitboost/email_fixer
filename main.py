@@ -70,7 +70,7 @@ st.markdown("## Enter Your Email To Convert")
 openai_api_key = st.secrets["OPENAPI_KEY"]
 
 with st.sidebar:
-    st.markdown("# Email Enhancer")
+    st.markdown("## Email Enhancer")
     option_tone = st.selectbox(
         'Which tone would you like your email to have?',
         ('Professional 🤝', 'Friendly ✋'))
