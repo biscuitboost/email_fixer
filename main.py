@@ -110,8 +110,7 @@ with col3:
           type='primary', 
           help="Click Fix Your Email", 
           on_click=update_text_with_example)
-with col4:
-    pass
+
 
 with st.container():
     if email_input:
