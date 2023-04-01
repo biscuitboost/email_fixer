@@ -75,17 +75,17 @@ col1, col2, col3 = st.columns(3)
 with col1:
     option_tone = st.selectbox(
         'Which tone would you like your email to have?',
-        ('Professional', 'Friendly'))
+        ('Professional 🤝', 'Friendly ✋'))
     
 with col2:
     option_dialect = st.selectbox(
         'Which English Dialect would you like?',
-        ('British English', 'American English'))
+        ('British English 🇬🇧', 'American English 🇺🇸'))
 
 with col3:
     option_emailtype = st.selectbox(
         'What type of email are you sending?',
-        ('Contractor to customer', 'Office setting', 'Personal'))
+        ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
 
 
 
