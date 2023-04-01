@@ -51,6 +51,9 @@ def update_text_with_example():
 
 def llm_call(option_tone, option_dialect, option_emailtype ):
     email_input = get_text()
+    if len(email_input.split(" ")) > 700:
+        st.warning("Please enter a shorter email. The maximum length is 700 words.")
+        st.stop()
     openai_api_key = st.secrets["OPENAPI_KEY"]
     llm = load_LLM(openai_api_key=openai_api_key)
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
@@ -104,15 +107,6 @@ with st.sidebar:
 #    option_emailtype = st.selectbox(
 #        'What type of email are you sending?',
 #        ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
-
-
-
-        
-
-if len(email_input.split(" ")) > 700:
-    st.warning("Please enter a shorter email. The maximum length is 700 words.")
-    st.stop()
-
 
 col1, col2, col3, col4 = st.columns(4)
 
