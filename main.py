@@ -1,4 +1,5 @@
 import streamlit as st
+import time
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
@@ -119,8 +120,12 @@ if email_input:
     st.balloons()
     
 
-st.section
-
+with st.empty():
+    for seconds in range(60):
+        st.write(f"⏳ {seconds} seconds have passed")
+        time.sleep(1)
+    st.write("✔️ 1 minute over!")
+    
 col1, col2 = st.columns(2)        
 with col1:
     st.markdown("\
