@@ -58,6 +58,7 @@ def llm_call(option_tone, option_dialect, option_emailtype ):
     llm = load_LLM(openai_api_key=openai_api_key)
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
     formatted_email = llm(prompt_with_email)
+    return formatted_email
 
 ##################
 # Page Code
@@ -68,7 +69,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
 
 st.markdown("## Enter Your Email To Convert")
 
@@ -114,7 +114,7 @@ with col3:
     st.button("*Fix My Email*", 
           type='primary', 
           help="Click Fix Your Email", 
-          on_click=llm_call(option_tone,option_dialect, option_emailtype ))
+          on_click=llm_call(option_tone,option_dialect, option_emailtype))
 
 
 with st.container():
