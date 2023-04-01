@@ -1,5 +1,8 @@
-import streamlit as st
+# Import System Libraries
 import time
+
+# Import Third-party Libraries
+import streamlit as st
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 
@@ -37,8 +40,6 @@ prompt = PromptTemplate(
 # Functions
 ##################
 def load_LLM(openai_api_key):
-    """Logic for loading the chain you want to use should go here."""
-    # Make sure your openai_api_key is set as an environment variable
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
 
@@ -94,7 +95,7 @@ with col3:
     st.button("*Fix My Email*", 
           type='primary', 
           help="Click Fix Your Email", 
-          on_click=llm_call(option_tone,option_dialect, option_emailtype))
+          on_click=llm_call(option_tone,option_dialect, option_emailtype ))
 
 with st.container():
     if email_input:
@@ -115,10 +116,10 @@ Introducing **Email Fixer**, the perfect solution for anyone struggling with Eng
 benefits_text = """\
 - **Improved communication:** Our app helps bridge the communication gap by refining your email,-making it easier to understand and more professional.\n 
 - **Time-saving:** Save time and effort by having your email automatically rewritten, preventing the need for manual editing and revision. \n 
-- **Increased confidence:** With our app, you can feel more confident in your writing skills, knowing that your email is accurately conveyed and polished. \n \
+- **Increased confidence:** With our app, you can feel more confident in your writing skills, knowing that your email is accurately conveyed and polished. \n 
 - **Competitive edge:** Stand out from the crowd by creating highly professional emails that impress your recipients.
 """    
-    
+        
 st.markdown(about_email_fixer)
 
 col1, col2 = st.columns(2)        
