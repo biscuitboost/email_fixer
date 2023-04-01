@@ -97,34 +97,29 @@ if len(email_input.split(" ")) > 700:
     st.stop()
 
 
-
-st.button("*See An Example*", 
+col1, col2 = st.columns(2)
+with col1:
+    st.button("*See An Example*", 
           type='secondary', 
           help="Click to see an example of the email you will be converting.", 
           on_click=update_text_with_example)
-
-st.button("*Fix My Email*", 
+with col2:
+    st.button("*Fix My Email*", 
           type='primary', 
           help="Click Fix Your Email", 
           on_click=update_text_with_example)
 
-
-if email_input:
-    with st.spinner(text="In progress..."):
-        llm = load_LLM(openai_api_key=openai_api_key)
-        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
-        formatted_email = llm(prompt_with_email)
-        with st.container():
-            st.markdown("### Your Converted Email:")
-            st.info(formatted_email, icon="✉️")
+with st.container():
+    if email_input:
+        with st.spinner(text="In progress..."):
+            llm = load_LLM(openai_api_key=openai_api_key)
+            prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
+            formatted_email = llm(prompt_with_email)
+            with st.container():
+                st.markdown("### Your Converted Email:")
+                st.info(formatted_email, icon="✉️")
     st.balloons()
     
-
-with st.empty():
-    for seconds in range(60):
-        st.write(f"⏳ {seconds} seconds have passed")
-        time.sleep(1)
-    st.write("✔️ 1 minute over!")
     
 col1, col2 = st.columns(2)        
 with col1:
