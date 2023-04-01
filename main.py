@@ -67,7 +67,7 @@ st.header("Email Fixer")
 
 
 
-st.markdown("# Enter Your Email To Convert")
+st.markdown("## Enter Your Email To Convert")
 
 openai_api_key = st.secrets["OPENAPI_KEY"]
 
@@ -123,7 +123,7 @@ with st.container():
         st.balloons()
     
 
-st.markdown("# About Email Fixer")
+st.markdown("## About Email Fixer")
 
 col1, col2 = st.columns(2)        
 with col1:
