@@ -50,17 +50,6 @@ def get_input_email():
 def update_email_with_example():
     st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
-def llm_call(option_tone, option_dialect, option_emailtype):
-    llm = load_LLM(openai_api_key=openai_api_key)
-    prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
-    formatted_email = llm(prompt_with_email)
-    return formatted_email
-
-# Check if the button was clicked
-def button_clicked():
-    if 'button_click' not in st.session_state:
-        st.session_state.button_click = False
-    return st.session_state.button_click
 
 ##################
 # Page Code
@@ -92,15 +81,14 @@ if len(email_input.split(" ")) > 700:
     st.stop()
 
 col1, col2, col3, col4 = st.columns(4)
-with col2:
-    if st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting."):
-        update_email_with_example()
-with col3:
-    if st.button("*Fix My Email*", type='primary', help="Click Fix Your Email"):
-        st.session_state.button_click = True
+with col1:
+    st.button("*See An Example*", 
+          type='secondary', 
+          help="Click to see an example of the email you will be converting.", 
+          on_click=update_email_with_example)
 
 with st.container():
-    if email_input and button_clicked():
+    if email_input:
         with st.spinner(text="In progress..."):
             llm = load_LLM(openai_api_key=openai_api_key)
             prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
