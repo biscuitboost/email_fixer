@@ -97,7 +97,9 @@ if len(email_input.split(" ")) > 700:
     st.stop()
 
 
-col1, col2 = st.columns(4)
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+   pass 
 with col2:
     st.button("*See An Example*", 
           type='secondary', 
@@ -108,6 +110,8 @@ with col3:
           type='primary', 
           help="Click Fix Your Email", 
           on_click=update_text_with_example)
+with col4:
+    pass
 
 with st.container():
     if email_input:
