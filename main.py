@@ -102,6 +102,11 @@ st.button("*See An Example*",
           help="Click to see an example of the email you will be converting.", 
           on_click=update_text_with_example)
 
+st.button("*Fix My Email*", 
+          type='primary', 
+          help="Click Fix Your Email", 
+          on_click=update_text_with_example)
+
 
 if email_input:
     with st.spinner(text="In progress..."):
