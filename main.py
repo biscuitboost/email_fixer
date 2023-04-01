@@ -123,7 +123,7 @@ st.markdown(about_email_fixer)
 
 col1, col2 = st.columns(2)        
 with col1:
-    st.markdown(about_email_fixer_intro_text)
+    st.markdown(about_email_fixer)
 
 with col2:
     st.markdown(benefits_text)
