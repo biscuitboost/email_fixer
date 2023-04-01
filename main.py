@@ -74,12 +74,12 @@ col1, col2, col3 = st.columns(3)
 with col1:
     option_tone = st.selectbox(
         'Which tone would you like your email to have?',
-        ('Formal', 'Informal'))
+        ('Professional', 'Friendly'))
     
 with col2:
     option_dialect = st.selectbox(
         'Which English Dialect would you like?',
-        ('British English', 'American English', 'Scots', 'Welsh', 'Cornish'))
+        ('British English', 'American English'))
 
 with col3:
     option_emailtype = st.selectbox(
@@ -114,6 +114,7 @@ if email_input:
     st.balloons()
     
 
+st.section
 
 col1, col2 = st.columns(2)        
 with col1:
