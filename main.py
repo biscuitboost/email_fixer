@@ -6,7 +6,8 @@ from langchain.llms import OpenAI
 ##################
 # Global Variables
 ##################
-formatted_email = ""
+openai_api_key = st.secrets["OPENAPI_KEY"]
+
 template = """
     Below is an email from me that may be poorly worded.
     Your goal is to:
@@ -50,11 +51,6 @@ def update_text_with_example():
     st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
 def llm_call(option_tone, option_dialect, option_emailtype ):
-    email_input = get_text()
-    if len(email_input.split(" ")) > 700:
-        st.warning("Please enter a shorter email. The maximum length is 700 words.")
-        st.stop()
-    openai_api_key = st.secrets["OPENAPI_KEY"]
     llm = load_LLM(openai_api_key=openai_api_key)
     prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
     formatted_email = llm(prompt_with_email)
@@ -85,7 +81,11 @@ with st.sidebar:
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
         
-        
+
+email_input = get_text()
+if len(email_input.split(" ")) > 700:
+    st.warning("Please enter a shorter email. The maximum length is 700 words.")
+    st.stop()      
 
 #col1, col2, col3 = st.columns(3)
 #with col1:
@@ -104,7 +104,6 @@ with st.sidebar:
 #        ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
 
 col1, col2, col3, col4 = st.columns(4)
-
 with col2:
     st.button("*See An Example*", 
           type='secondary', 
@@ -118,11 +117,11 @@ with col3:
 
 
 with st.container():
-    if formatted_email:
+    if email_input:
         with st.spinner(text="In progress..."):
-            #llm = load_LLM(openai_api_key=openai_api_key)
-            #prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, #email=email_input)
-            #formatted_email = llm(prompt_with_email)
+            llm = load_LLM(openai_api_key=openai_api_key)
+            prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
+            formatted_email = llm(prompt_with_email)
             st.markdown("### Your Converted Email:")
             st.info(formatted_email, icon="✉️")
         st.balloons()
