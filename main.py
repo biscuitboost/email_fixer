@@ -63,7 +63,6 @@ st.set_page_config(
         'About': "# This is a header. This is an *extremely* cool app!"
     }
 )
-st.header("Email Fixer")
 
 
 st.markdown("## Enter Your Email To Convert")
@@ -71,7 +70,7 @@ st.markdown("## Enter Your Email To Convert")
 openai_api_key = st.secrets["OPENAPI_KEY"]
 
 with st.sidebar:
-    st.markdown("## About Email Fixer")
+    st.header("Email Fixer")
     option_tone = st.selectbox(
         'Which tone would you like your email to have?',
         ('Professional 🤝', 'Friendly ✋'))
@@ -136,6 +135,7 @@ with st.container():
         st.balloons()
     
 
+st.markdown("## About Email Fixer")
 
 col1, col2 = st.columns(2)        
 with col1:
