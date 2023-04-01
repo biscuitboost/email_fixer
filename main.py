@@ -6,6 +6,7 @@ from langchain.llms import OpenAI
 ##################
 # Global Variables
 ##################
+formatted_email = ""
 template = """
     Below is an email from me that may be poorly worded.
     Your goal is to:
@@ -48,6 +49,12 @@ def update_text_with_example():
     print ("in updated")
     st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
+def llm_call(option_tone, option_dialect, option_emailtype ):
+    email_input = get_text()
+    openai_api_key = st.secrets["OPENAPI_KEY"]
+    llm = load_LLM(openai_api_key=openai_api_key)
+    prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
+    formatted_email = llm(prompt_with_email)
 
 ##################
 # Page Code
@@ -67,7 +74,6 @@ st.set_page_config(
 
 st.markdown("## Enter Your Email To Convert")
 
-openai_api_key = st.secrets["OPENAPI_KEY"]
 
 with st.sidebar:
     st.markdown("## Email Enhancer")
@@ -101,7 +107,6 @@ with st.sidebar:
 
 
 
-email_input = get_text()
         
 
 if len(email_input.split(" ")) > 700:
@@ -120,18 +125,17 @@ with col3:
     st.button("*Fix My Email*", 
           type='primary', 
           help="Click Fix Your Email", 
-          on_click=update_text_with_example)
+          on_click=llm_call(option_tone,option_dialect, option_emailtype ))
 
 
 with st.container():
-    if email_input:
+    if formatted_email:
         with st.spinner(text="In progress..."):
-            llm = load_LLM(openai_api_key=openai_api_key)
-            prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
-            formatted_email = llm(prompt_with_email)
-            with st.container():
-                st.markdown("### Your Converted Email:")
-                st.info(formatted_email, icon="✉️")
+            #llm = load_LLM(openai_api_key=openai_api_key)
+            #prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, #email=email_input)
+            #formatted_email = llm(prompt_with_email)
+            st.markdown("### Your Converted Email:")
+            st.info(formatted_email, icon="✉️")
         st.balloons()
     
 
