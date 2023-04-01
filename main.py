@@ -10,12 +10,14 @@ template = """
     Your goal is to:
     - Give a suggested email subject line.
     - Include an appropriate salutation.
-    - Convert the input text to a specified tone.
-    - Convert the input text to a specified dialect.
+    - Taylor the email according to TYPE.
+    - Convert the input text to a specified TONE.
+    - Convert the input text to a specified DIALECT.
     - End email with a conclusion and CTA if appropriate.
     - Properly format the email
  
     Below is the current email, suggested tone, and dialect:
+    TYPE: {emailType}
     TONE: {tone}
     DIALECT: {dialect}
     EMAIL: {email}
@@ -24,7 +26,7 @@ template = """
 """
 
 prompt = PromptTemplate(
-    input_variables=["tone", "dialect", "email"],
+    input_variables=["tone", "dialect", 'emailType', "email"],
     template=template,
 )
 
@@ -68,7 +70,7 @@ st.markdown("## Enter Your Email To Convert")
 
 openai_api_key = st.secrets["OPENAPI_KEY"]
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(2)
 with col1:
     option_tone = st.selectbox(
         'Which tone would you like your email to have?',
@@ -78,6 +80,11 @@ with col2:
     option_dialect = st.selectbox(
         'Which English Dialect would you like?',
         ('British English', 'American English', 'Scots', 'Welsh', 'Cornish'))
+
+with col3:
+    option_emailtype = st.selectbox(
+        'What type of email are you sending?',
+        ('Contractor to customer', 'Office setting', 'Personal'))
 
 
 
@@ -99,7 +106,7 @@ st.button("*See An Example*",
 if email_input:
     with st.spinner(text="In progress..."):
         llm = load_LLM(openai_api_key=openai_api_key)
-        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, email=email_input)
+        prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
         formatted_email = llm(prompt_with_email)
         with st.container():
             st.markdown("### Your Converted Email:")
