@@ -65,22 +65,23 @@ st.set_page_config(
 )
 st.header("Email Fixer")
 
-# Using object notation
-add_selectbox = st.sidebar.selectbox(
-    "How would you like to be contacted?",
-    ("Email", "Home phone", "Mobile phone")
-)
-
-# Using "with" notation
-with st.sidebar:
-    add_radio = st.radio(
-        "Choose a shipping method",
-        ("Standard (5-15 days)", "Express (2-5 days)")
-    )
 
 st.markdown("## Enter Your Email To Convert")
 
 openai_api_key = st.secrets["OPENAPI_KEY"]
+
+with st.sidebar:
+    option_tone = st.selectbox(
+        'Which tone would you like your email to have?',
+        ('Professional 🤝', 'Friendly ✋'))
+    option_dialect = st.selectbox(
+        'Which English Dialect would you like?',
+        ('British English 🇬🇧', 'American English 🇺🇸'))
+    option_emailtype = st.selectbox(
+        'What type of email are you sending?',
+        ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
+        
+        
 
 col1, col2, col3 = st.columns(3)
 with col1:
