@@ -98,8 +98,7 @@ if len(email_input.split(" ")) > 700:
 
 
 col1, col2, col3, col4 = st.columns(4)
-with col1:
-   pass 
+
 with col2:
     st.button("*See An Example*", 
           type='secondary', 
@@ -121,7 +120,7 @@ with st.container():
             with st.container():
                 st.markdown("### Your Converted Email:")
                 st.info(formatted_email, icon="✉️")
-    st.balloons()
+        st.balloons()
     
     
 col1, col2 = st.columns(2)        
