@@ -8,13 +8,14 @@ from langchain.llms import OpenAI
 template = """
     Below is an email from me that may be poorly worded.
     Your goal is to:
+    - Give a suggested email subject line.
+    - Include an appropriate salutation.
+    - Convert the input text to a specified tone.
+    - Convert the input text to a specified dialect.
+    - End email with a conclusion and CTA if appropriate.
     - Properly format the email
-    - Convert the input text to a specified tone
-    - Convert the input text to a specified dialect
  
-    Please start the email with a warm introduction.
-    
-    Below is the email, tone, and dialect:
+    Below is the current email, suggested tone, and dialect:
     TONE: {tone}
     DIALECT: {dialect}
     EMAIL: {email}
@@ -26,6 +27,7 @@ prompt = PromptTemplate(
     input_variables=["tone", "dialect", "email"],
     template=template,
 )
+
 ##################
 # Functions
 ##################
@@ -47,8 +49,17 @@ def update_text_with_example():
 ##################
 # Page Code
 ##################
-
-st.set_page_config(page_title="Email Enhancer", page_icon=":robot:")
+st.set_page_config(
+    page_title="Email Enhancer",
+    page_icon=":robot:",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
+)
 st.header("Email Fixer")
 
 
