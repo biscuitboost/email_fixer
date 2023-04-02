@@ -10,7 +10,7 @@ from langchain.llms import OpenAI
 # Global Variables
 ##################
 openai_api_key = st.secrets["OPENAPI_KEY"]
-
+email_input = ""
 template = """\
     Below is an email from me that may be poorly worded.
     Your goal is to:
@@ -50,7 +50,7 @@ def get_input_email():
 def update_email_with_example():
     st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
-def convert_email():
+def convert_email(email_input):
     if email_input:
         with st.spinner(text="In progress..."):
             llm = load_LLM(openai_api_key=openai_api_key)
@@ -88,7 +88,7 @@ with st.sidebar:
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
     if st.button("Convert Email", type="primary"):
-        convert_email()
+        convert_email(email_input)
 
 
 email_input = get_input_email()
