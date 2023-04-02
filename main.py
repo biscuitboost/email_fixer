@@ -65,15 +65,18 @@ st.markdown("## Enter Your Email To Convert")
 
 with st.sidebar:
     st.markdown("## Email Enhancer")
-    option_tone = st.radio(
+    option_tone = st.selectbox(
         'Which tone would you like your email to have?',
-        ('Professional 🤝', 'Friendly ✋'))
-    option_dialect = st.radio(
+        ('Professional 🤝', 'Friendly ✋', 'Casual 🏖️', 'Enthusiastic 😃', 'Apologetic 😔', 'Gratitude 🙏', 'Persuasive 💬', 'Urgent 🚨'), key="option_tone")
+
+    option_dialect = st.selectbox(
         'Which English Dialect would you like?',
-        ('British English 🇬🇧', 'American English 🇺🇸'))
-    option_emailtype = st.radio(
+        ('British English 🇬🇧', 'American English 🇺🇸', 'Australian English 🇦🇺', 'Canadian English 🇨🇦', 'New Zealand English 🇳🇿', 'Irish English 🇮🇪', 'South African English 🇿🇦'), key="option_dialect")
+
+    option_email_type = st.selectbox(
         'What type of email are you sending?',
-        ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
+        ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
+
 
 email_input = get_input_email()
 if len(email_input.split(" ")) > 700:
