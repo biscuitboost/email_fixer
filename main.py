@@ -50,6 +50,17 @@ def get_input_email():
 def update_email_with_example():
     st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
+def convert_email():
+    if email_input:
+        with st.spinner(text="In progress..."):
+            llm = load_LLM(openai_api_key=openai_api_key)
+            prompt_with_email = prompt.format(
+                tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input
+            )
+            formatted_email = llm(prompt_with_email)
+            st.session_state["formatted_email"] = formatted_email
+            st.balloons()
+
 
 ##################
 # Page Code
@@ -76,6 +87,8 @@ with st.sidebar:
     option_emailtype = st.selectbox(
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
+    if st.button("Convert Email", type="primary"):
+        convert_email()
 
 
 email_input = get_input_email()
@@ -111,11 +124,9 @@ def convert_email():
             st.info(formatted_email, icon="✉️")
             st.balloons()
 
-# Create a conversion button and its callback function
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Convert Email", type="primary"):
-        convert_email()
+if "formatted_email" in st.session_state:
+    st.markdown("### Your Converted Email:")
+    st.info(st.session_state["formatted_email"], icon="✉️")
 
 
 about_email_fixer = """\
