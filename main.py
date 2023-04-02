@@ -90,7 +90,18 @@ with col1:
           help="Click to see an example of the email you will be converting.", 
           on_click=update_email_with_example)
 
-with st.container():
+#with st.container():
+#    if email_input:
+#        with st.spinner(text="In progress..."):
+#            llm = load_LLM(openai_api_key=openai_api_key)
+#            prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, #email=email_input)
+#            formatted_email = llm(prompt_with_email)
+#            st.markdown("### Your Converted Email:")
+#            st.info(formatted_email, icon="✉️")
+#        st.balloons()
+        
+# Email conversion handling function
+def convert_email():
     if email_input:
         with st.spinner(text="In progress..."):
             llm = load_LLM(openai_api_key=openai_api_key)
@@ -98,7 +109,14 @@ with st.container():
             formatted_email = llm(prompt_with_email)
             st.markdown("### Your Converted Email:")
             st.info(formatted_email, icon="✉️")
-        st.balloons()
+            st.balloons()
+
+# Create a conversion button and its callback function
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("Convert Email", type="primary"):
+        convert_email()
+
 
 about_email_fixer = """\
 ## About Email Fixer
