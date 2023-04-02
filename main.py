@@ -73,7 +73,7 @@ with st.sidebar:
         'Which English Dialect would you like?',
         ('British English 🇬🇧', 'American English 🇺🇸', 'Australian English 🇦🇺', 'Canadian English 🇨🇦', 'New Zealand English 🇳🇿', 'Irish English 🇮🇪', 'South African English 🇿🇦'), key="option_dialect")
 
-    option_email_type = st.selectbox(
+    option_emailtype = st.selectbox(
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
 
