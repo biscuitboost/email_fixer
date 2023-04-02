@@ -76,6 +76,8 @@ with st.sidebar:
     option_emailtype = st.selectbox(
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
+    if st.button("Convert Email", type="primary"):
+        convert_email()
 
 
 email_input = get_input_email()
@@ -111,11 +113,6 @@ def convert_email():
             st.info(formatted_email, icon="✉️")
             st.balloons()
 
-# Create a conversion button and its callback function
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Convert Email", type="primary"):
-        convert_email()
 
 
 about_email_fixer = """\
