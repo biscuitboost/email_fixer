@@ -65,13 +65,13 @@ st.markdown("## Enter Your Email To Convert")
 
 with st.sidebar:
     st.markdown("## Email Enhancer")
-    option_tone = st.selectbox(
+    option_tone = st.radio(
         'Which tone would you like your email to have?',
         ('Professional 🤝', 'Friendly ✋'))
-    option_dialect = st.selectbox(
+    option_dialect = st.radio(
         'Which English Dialect would you like?',
         ('British English 🇬🇧', 'American English 🇺🇸'))
-    option_emailtype = st.selectbox(
+    option_emailtype = st.radio(
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼'))
 
