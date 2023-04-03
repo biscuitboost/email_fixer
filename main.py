@@ -51,7 +51,10 @@ def update_email_with_example():
     st.session_state.email_input = "Sally I am starts work at yours monday\nfrom dave"
 
 def convert_email(email_input):
+    st.write("starting convert email....")
+    st.write(email_input)
     if email_input:
+        st.write("email_input has value....")
         with st.spinner(text="In progress..."):
             llm = load_LLM(openai_api_key=openai_api_key)
             prompt_with_email = prompt.format(
