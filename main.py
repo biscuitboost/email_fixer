@@ -105,15 +105,29 @@ with col1:
 
         
 # Email conversion handling function
-def convert_email():
+def convert_email(email_input):
     if email_input:
         with st.spinner(text="In progress..."):
             llm = load_LLM(openai_api_key=openai_api_key)
-            prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
+            prompt_with_email = prompt.format(
+                tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input
+            )
             formatted_email = llm(prompt_with_email)
+            
+            # Display the formatted email
             st.markdown("### Your Converted Email:")
             st.info(formatted_email, icon="✉️")
             st.balloons()
+            
+#def convert_email():
+#    if email_input:
+#        with st.spinner(text="In progress..."):
+#            llm = load_LLM(openai_api_key=openai_api_key)
+#            prompt_with_email = prompt.format(tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input)
+#            formatted_email = llm(prompt_with_email)
+#            st.markdown("### Your Converted Email:")
+#            st.info(formatted_email, icon="✉️")
+#            st.balloons()
 
 #if "formatted_email" in st.session_state:
 #    st.markdown("### Your Converted Email:")
