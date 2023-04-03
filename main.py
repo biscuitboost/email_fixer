@@ -5,7 +5,7 @@ import time
 import streamlit as st
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
-from streamlit_info_copyable import st_info_copyable
+from streamlit_info_copyable.py import st_info_copyable
 
 
 ##################
