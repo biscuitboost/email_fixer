@@ -77,6 +77,11 @@ st.set_page_config(
 
 st.markdown("## Enter Your Email To Convert")
 
+email_input = get_input_email()
+if len(email_input.split(" ")) > 700:
+    st.warning("Please enter a shorter email. The maximum length is 700 words.")
+    st.stop()
+    
 with st.sidebar:
     st.markdown("## Email Enhancer")
     option_tone = st.selectbox(
@@ -93,11 +98,6 @@ with st.sidebar:
     if st.button("Convert Email", type="primary"):
         convert_email(email_input)
 
-
-email_input = get_input_email()
-if len(email_input.split(" ")) > 700:
-    st.warning("Please enter a shorter email. The maximum length is 700 words.")
-    st.stop()
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
