@@ -95,7 +95,7 @@ with st.sidebar:
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
     if st.button("Convert Email", type="primary"):
-        convert_email(email_input)
+        convert_email(email_input, use_container_width=True)
 
 
 col1, col2, col3, col4 = st.columns(4)
