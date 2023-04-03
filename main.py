@@ -104,7 +104,7 @@ with col1:
           on_click=update_email_with_example)
 
 
-st.echo(st.session_state)        
+st.write(st.session_state)        
 
 if "formatted_email" in st.session_state:
     st.markdown("### Your Converted Email:")
