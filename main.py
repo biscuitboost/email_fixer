@@ -108,6 +108,7 @@ with col1:
 if "formatted_email" in st.session_state:
     st.markdown("### Your Converted Email:")
     st.info(st.session_state["formatted_email"], icon="✉️")
+    st.code(st.session_state["formatted_email"], icon="✉️")
 
 
 about_email_fixer = """\
