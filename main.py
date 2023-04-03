@@ -5,6 +5,8 @@ import time
 import streamlit as st
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
+from streamlit_info_copyable import st_info_copyable
+
 
 ##################
 # Global Variables
@@ -129,3 +131,8 @@ with col1:
 
 with col2:
     st.markdown(benefits_text)
+    
+st.title("Streamlit Custom Info with Copy Button")
+info_text = "This is an example of st.info with a copy button!"
+
+st_info_copyable(info_text)
