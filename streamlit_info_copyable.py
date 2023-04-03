@@ -1,11 +1,11 @@
 import streamlit as st
 import os 
-from streamlit import file_util
+import streamlit.components.v1 as components
 from streamlit import components
 _RELEASE = False
 
 if not _RELEASE:  # during development
-    _component_func = components.declare_component("streamlit_info_copyable", url="https://email-fixer.streamlit.app")
+    _component_func = components.declare_component("streamlit_info_copyable", url="http://localhost:3001")
 else:  # when hosted
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     _component_func = components.declare_component("streamlit_info_copyable", path=parent_dir)
