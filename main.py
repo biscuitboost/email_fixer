@@ -82,7 +82,7 @@ if len(email_input.split(" ")) > 700:
     st.stop()
     
 with st.sidebar:
-    st.title("## Email Enhancer")
+    st.title("Email Enhancer")
     option_tone = st.selectbox(
         'Which tone would you like your email to have?',
         ('Professional 🤝', 'Friendly ✋', 'Casual 🏖️', 'Enthusiastic 😃', 'Apologetic 😔', 'Gratitude 🙏', 'Persuasive 💬', 'Urgent 🚨'), key="option_tone")
