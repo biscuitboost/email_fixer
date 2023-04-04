@@ -110,7 +110,7 @@ if "formatted_email" in st.session_state:
     #st.info(st.session_state["formatted_email"], icon="✉️")
     st.code(st.session_state["formatted_email"])
 
-st.divider()
+#st.divider()
 
 about_email_fixer = """\
 ## About Email Fixer
