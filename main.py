@@ -13,7 +13,7 @@ from langchain.llms import OpenAI
 ##################
 openai_api_key = st.secrets["OPENAPI_KEY"]
 email_input = ""
-old_template = """\
+template = """\
     Below is an email from me that may be poorly worded.
     Your goal is to:
     - Give a suggested email subject line.
@@ -32,7 +32,7 @@ old_template = """\
     
     YOUR {dialect} RESPONSE:
 """
-template = """\
+new_template = """\
     Act As: Editor
     Degree of Revision: Substantial
     Type of edit: Enhance clarity and consistency
