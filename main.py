@@ -25,7 +25,7 @@ template = """\
     - Properly format the email.
 
     Below is the current email, suggested tone, and dialect:
-    TYPE: {emailType}
+    TYPE: {style}
     TONE: {tone}
     DIALECT: {dialect}
     EMAIL: {email}
@@ -37,15 +37,16 @@ new_template = """\
     Degree of Revision: Substantial
     Type of edit: Enhance clarity and consistency
     Change style to: Academic, PhD Work
-    Change tone to: Analytical
+    Change tone to: {tone}Analytical
     Change reader comprehension level to: Advanced, assume extensive prior knowledge
+    Change dialect to: {dialect}
     Change length to: 200 words
     My text: {email}
 
 """
 
 prompt = PromptTemplate(
-    input_variables=["tone", "dialect", 'emailType', "email"],
+    input_variables=["tone", "dialect", 'style', "email"],
     template=template,
 )
 
@@ -68,7 +69,7 @@ def convert_email(email_input):
         with st.spinner(text="In progress..."):
             llm = load_LLM(openai_api_key=openai_api_key)
             prompt_with_email = prompt.format(
-                tone=option_tone, dialect=option_dialect, emailType=option_emailtype, email=email_input
+                tone=option_tone, dialect=option_dialect, style=option_style, email=email_input
             )
             formatted_email = llm(prompt_with_email)
             st.session_state["formatted_email"] = formatted_email
@@ -102,11 +103,11 @@ with st.sidebar:
         'Which English Dialect would you like?',
         ('British English 🇬🇧', 'American English 🇺🇸', 'Australian English 🇦🇺', 'Canadian English 🇨🇦', 'New Zealand English 🇳🇿', 'Irish English 🇮🇪', 'South African English 🇿🇦'), key="option_dialect")
 
-    option_emailtype = st.selectbox(
+    option_style = st.selectbox(
         'What type of email are you sending?',
         ('Contractor to customer 👷', 'Office setting 🧑‍💼', 'Product support inquiry 📧', 'Job application 📄', 'Networking email 🌐','Event invitation 🎫', 'Sales pitch 🛍️', 'Feedback request 📋', 'Newsletter announcement 📰', 'Internal team communication 💼', 'Educational content 📚'), key="option_email_type")
     if st.button("Convert Email", type="primary"):
-        convert_email(email_input, use_container_width=True)
+        convert_email(email_input)
 
 
 col1, col2, col3, col4 = st.columns(4)
